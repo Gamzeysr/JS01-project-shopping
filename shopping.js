@@ -8,15 +8,14 @@ window.addEventListener("load", () => {
     localStorage.setItem("shippingPrice", shippingPrice);
     localStorage.setItem("shippingFreePrice", shippingFreePrice);
 
-    // //!👆 Bu sekilde local staregeıme ve sessionStorage me attım böğlelikle 
-    // sessionStorage.setItem("taxRate", taxtRate);
-    // sessionStorage.setItem("shippingPrice", shippingPrice);
-    // sessionStorage.setItem("shippingFreePrice", shippingFreePrice);
+    // //!👆 Bu sekilde local staregeıme ve sessionStorage me attım böğlelikle
+    sessionStorage.setItem("taxRate", taxtRate);
+    sessionStorage.setItem("shippingPrice", shippingPrice);
+    sessionStorage.setItem("shippingFreePrice", shippingFreePrice);
 
 })
 
-// //! Bu sekilde local staregeıme ve sessionStorage me attım böğlelikle
-// //! localStorage ile sessionStorage in farkı localStorage de kullanıcı oturumu sonlandırdıgı zaman sessionStorage silinmiş oluyor.localStorage dde kalıyor .
+// //! localStorage ile sessionStorage in farkı: localStorage de kullanıcı oturumu sonlandırdıgı zaman sessionStorage silinmiş oluyor.localStorage de kalıyor .
 
 // const productsDiv = document.querySelector(".products");
 // // Bu kısımda bu üç ürünün ana divini yani productina yakalamış oluyorum
