@@ -3,6 +3,16 @@
     padding: 0;
 }
 
+main {
+    position: relative;
+    width: 70%;
+    left: 70%;
+    transform: translateX(-50%);
+    margin: 35px 0;
+    display: grid;
+    grid-template-columns: 465px 320px;
+}
+
 #checkout-title {
     font-family: Mon, Arial, Helvetica, sans-serif;
     text-align: center;
@@ -13,6 +23,97 @@ main form {
     margin-right: 150px;
     position: relative;
     width: 80%;
+}
+
+.data-form {
+    font-family: Mon;
+    position: relative;
+    display: block;
+}
+
+.data-form h1 {
+    font-size: 18px;
+    color: #333;
+    margin: 15px 0;
+}
+
+.data-form .campo {
+    margin: 10px 0;
+}
+
+.data-form .campo label {
+    font-size: 12px;
+    color: #4f4f4f;
+    margin: 10px 0;
+    position: relative;
+    display: block;
+}
+
+.data-form .campo .input-field {
+    position: relative;
+}
+
+.data-form .campo .input-field input {
+    border: 1px solid #828282;
+    padding: 8px 5px 8px 35px;
+    color: #828282;
+    font-size: 14px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.data-form .campo .input-field i {
+    position: absolute;
+    color: #828282;
+    font-size: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 3%;
+}
+
+#shipping-address {
+    margin-top: 50px;
+}
+
+#country-field {
+    display: inline-block;
+    margin-right: 2%;
+}
+
+#postal-code-field {
+    display: inline-block;
+    width: auto;
+}
+
+#country-field div select {
+    border: none;
+    padding: 8px 5px 8px 35px;
+    border-radius: 5px;
+    border: 1px solid #828282;
+}
+
+#user-reminder {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#user-reminder~label {
+    display: inline-block;
+    margin-top: -10px !important;
+}
+
+#btn-submit {
+    width: 20%;
+    padding: 14px 0;
+    border-radius: 10px;
+    background-color: #f2994a;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    position: absolute;
+    right: 0;
+    margin-right: -50px;
 }
 
 #products-preview {
@@ -373,7 +474,7 @@ i {
         grid-template-columns: 100%;
         width: 90%;
         grid-template-rows: 400px 1fr;
-        grid-template-areas: "top""bottom";
+        grid-template-areas: "top" "bottom";
     }
 
     main form {
