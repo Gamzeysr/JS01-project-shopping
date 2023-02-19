@@ -41,7 +41,7 @@ productsDiv.addEventListener("click", (event) => {
         //   eğer tıklamış oldugumın parentelementinnin clasının ismi quantity olanı 1 den buyukse bir bir azalt dedik buarada
         else {
             if (confirm("Product will be removed???")) {
-                // confirm true mu false mu diye sorup kaldırma işlemi remove yapıyor burada
+                //? confirm true mu false mu diye sorup kaldırma işlemi remove yapıyor burada
                 event.target.parentElement.parentElement.parentElement.remove();
                 //?kaldır uyarınıa tamam dersek div i kaldırmış oluyoruz
                 //         // calculateCartPrice();
