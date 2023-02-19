@@ -33,10 +33,9 @@ productsDiv.addEventListener("click", (event) => {
             //👆 tıklanan elementın parentına git ve 1 den byukse
             event.target.parentElement.querySelector(".quantity").innerText--;
             //👆 her  e tıklanıldıgında yanı eksı butonuna basıldıgında bırer bırer düş dedik.  
-            //     calculateProductPrice(event.target);
-
-
-            //     // calculateCartPrice();
+            calculateProductPrice(event.target);
+            calculateCartPrice();
+            //?👆 ürünler eksi butonuna basıldıgında hrekete gececeğinden burada ve eksi butonuna hrekete gececinden eksi butonunun oldugu yerde fonk ları cagırdık 
         }
         //   eğer tıklamış oldugumın parentelementinnin clasının ismi quantity olanı 1 den buyukse bir bir azalt dedik buarada
         else {
@@ -44,7 +43,8 @@ productsDiv.addEventListener("click", (event) => {
                 //? confirm true mu false mu diye sorup kaldırma işlemi remove yapıyor burada
                 event.target.parentElement.parentElement.parentElement.remove();
                 //?kaldır uyarınıa tamam dersek div i kaldırmış oluyoruz
-                //         // calculateCartPrice();
+                calculateCartPrice();
+                //?👆 silme yanı kaldırma olayında sadece sepet harekete gececği için sepetin oldugu fonk cagırdık buraya bosu bosuna diğer ürünleri ekleyecek olan fonk cagırmadık 
             }
         }
     }
@@ -52,68 +52,69 @@ productsDiv.addEventListener("click", (event) => {
         // console.log("plus btn is clicked!");
         event.target.previousElementSibling.innerText++;
         //👆 Burada tıkladıgım hedefdekinin bir önceki elementi p içinde ki  oluyor bunların innertextine artır dedim böğlelikle Yani artı butonuna basıldıgında 1 leri her seferinde bir artır dedim
-        // calculateProductPrice(event.target);
-        // // Buraya buttonlar tıklandıgında harekete gecildin sidiye bu sekilde göndedik
-        // calculateCartPrice();
+        calculateProductPrice(event.target);
+        calculateCartPrice();
+        //?👆 ürünler eksi butonuna basıldıgında hrekete gececeğinden burada ve eksi butonuna hrekete gececinden eksi butonunun oldugu yerde fonk ları cagırdık 
     }
     else if (event.target.className == "remove-product") {
         // console.log("remove btn is clicked!");
         event.target.parentElement.parentElement.parentElement.remove();
+        calculateCartPrice();
     }
     else {
         console.log("other element is clicked!");
     }
 });
+// Hesaplama kısmı👇
+const calculateProductPrice = (clickeBtn) => {
+    //* burası ürünleri güncelleyecek olan kısım 
 
-// const calculateProductPrice = (clickeBtn) =>
-// // Burası artı butonuna basıldıgında calısacak
-// {
+    const productInfoDiv = clickeBtn.parentElement.parentElement;
+    // burası quantity-controller classındaki div
+    // console.log(productInfoDiv);
+    //! hem artı butonuna hem eksi butonuna ulaşmka için bunu yaptık
+    //! hangi resimdeki artıya tıkladıysam onu çalıştırıyor bu kısım
+    const price = productInfoDiv.querySelector(".product-price strong").innerText;
+    //! Burada htmlde ki product-price in stronguna yani içinde ki 25.98 yazına ulaşmaya calısıyorum
+    // alert(price);
+    const quantity = productInfoDiv.querySelector(".quantity").innerText;
+    //! Buradada quantityleri yani 1 sayısı yazan yeri almaya çalıştık
+    const productTotalDiv = productInfoDiv.querySelector(".product-line-price");
+    //! Burada da fiyat yazılarına ulaştım 25,98,45,99,74,99 a ulaştım
+    productTotalDiv.innerText = (price * quantity).toFixed(2);
+    // alert(quantity);
+    // Buradada o quatity dedğimiz 1 saysını yazan yer ile fiyatı çarpmayı yaptım
+    // toFixed koyarakda ondalıklı sayılardaki ifadelerden ondalık kısmı iki tane olsun diye ayarladık
 
-//     const productInfoDiv = clickeBtn.parentElement.parentElement;
-//     // burası quantity-controller classındaki div
-//     // console.log(productInfoDiv);
-//     //! hem artı butonuna hem eksi butonuna ulaşmka için bunu yaptık
-//     //! hangi resimdeki artıya tıkladıysam onu çalıştırıyor bu kısım
-//     const price = productInfoDiv.querySelector(".product-price strong").innerText;
-//     //! Burada htmlde ki product-price in stronguna yani içinde ki 25.98 yazına ulaşmaya calısıyorum
-//     // alert(price);
-//     const quantity = productInfoDiv.querySelector(".quantity").innerText;
-//     //! Buradada quantityleri yani 1 sayısı yazan yeri almaya çalıştık
-//     const productTotalDiv = productInfoDiv.querySelector(".product-line-price");
-//     //! Burada da fiyat yazılarına ulaştım 25,98,45,99,74,99 a ulaştım
-//     productTotalDiv.innerText = (price * quantity).toFixed(2);
-//     // alert(quantity);
-//     // Buradada o quatity dedğimiz 1 saysını yazan yer ile fiyatı çarpmayı yaptım
-//     // toFixed koyarakda ondalıklı sayılardaki ifadelerden ondalık kısmı iki tane olsun diye ayarladık
-
-// }
+}
 
 
-// const calculateCartPrice = () =>
-// // Subtotal tax shipping total yazan yer
-// {
-//     const productsTotalPricesDivs = document.querySelectorAll(".product-line-price");
+const calculateCartPrice = () =>
+//* burası da sepetin güncellenek oldgu kısım 
+// Subtotal tax shipping total yazan yer
+{
+    const productsTotalPricesDivs = document.querySelectorAll(".product-line-price");
 
-//     let subtotal = 0;
-//     productsTotalPricesDivs.forEach(div => {
-//         subtotal += parseFloat(div.innerText);
-//     });
-//     // console.log(subtotal);
-//     const taxPrice = subtotal * localStorage.getItem("taxRate");
-//     // Kdv hesapladık
+    let subtotal = 0;
+    productsTotalPricesDivs.forEach(div => {
+        subtotal += parseFloat(div.innerText);
+    });
+    // console.log(subtotal);
+    const taxPrice = subtotal * localStorage.getItem("taxRate");
+    // Kdv hesapladık
 
-//     const shippingPrice = parseFloat(subtotal > 0 && subtotal < localStorage.getItem("shippingFreePrice") ? localStorage.getItem("shippingPrice") : 0);
+    const shippingPrice = parseFloat(subtotal > 0 && subtotal < localStorage.getItem("shippingFreePrice") ? localStorage.getItem("shippingPrice") : 0);
 
-//     console.log(shippingPrice);
+    console.log(shippingPrice);
 
-//     document.querySelector("#cart-subtotal").lastElementChild.innerText = subtotal.toFixed(2);
+    document.querySelector("#cart-subtotal").lastElementChild.innerText = subtotal.toFixed(2);
 
-//     document.querySelector("#cart-tax p:nth-child(2)").innerText = taxPrice.toFixed(2);
+    document.querySelector("#cart-tax p:nth-child(2)").innerText = taxPrice.toFixed(2);
 
-//     document.querySelector("#cart-shipping").children[1].innerText = shippingPrice.toFixed(2);
+    document.querySelector("#cart-shipping").children[1].innerText = shippingPrice.toFixed(2);
 
-//     document.querySelector("#cart-total").lastElementChild.innerText = (subtotal + taxPrice + shippingPrice).toFixed(2);
-// }
+    document.querySelector("#cart-total").lastElementChild.innerText = (subtotal + taxPrice + shippingPrice).toFixed(2);
+}
 
 
 
