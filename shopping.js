@@ -3,7 +3,7 @@ const shippingPrice = 15;
 const shippingFreePrice = 300;
 
 window.addEventListener("load", () => {
-    calculateCartPrice();
+    // calculateCartPrice();
     localStorage.setItem("taxRate", taxtRate);
     localStorage.setItem("shippingPrice", shippingPrice);
     localStorage.setItem("shippingFreePrice", shippingFreePrice);
@@ -14,47 +14,56 @@ window.addEventListener("load", () => {
 
 })
 
-// //! localStorage ile sessionStorage in farkı: kullanıcı oturumu sonlandırdıgı zaman kaydedilenler sessionStorage silinmiş oluyor.localStorage de kalıyor .
+// //! localStorage ile sessionStorage in farkı: kullanıcı oturumu sonlandırdıgı zaman bilgiler sessionStorage silinmiş oluyor.localStorage de kalıyor .
 
-// const productsDiv = document.querySelector(".products");
-// // Bu kısımda bu üç ürünün ana divini yani productina yakalamış oluyorum
-// // benim amacım burada productsların içerisindekilere işlevsllik kazandırmak
-// // şimdii artı eksi ve remove butonlarını yakalıcam
-// productsDiv.addEventListener("click", (event) => {
-//     if (event.target.className == "fa-solid fa-minus") {
-//         // console.log("minus btn is clicked!");
-//         if (event.target.parentElement.querySelector(".quantity").innerText > 1) {
-//             event.target.parentElement.querySelector(".quantity").innerText--;
-//             calculateProductPrice(event.target);
-//             // Buraya buttonlar tıklandıgında harekete gecildin sidiye bu sekilde göndedik
-//             calculateCartPrice();
-//         }
-//         //   eğer tıklamış oldugumın parentelementinnin clasının ismi quantity olanı 1 den buyukse bir bir azalt dedik buarada
-//         else {
-//             if (confirm("Product will be removed???")) {
-//                 // confirm true mu false mu diye sorup kaldırma işlemi remove yapıyor burada
-//                 event.target.parentElement.parentElement.parentElement.remove();
-//                 // kaldır uyarınıa tamam dersek div i kaldırmış oluyoruz
-//                 calculateCartPrice();
-//             }
-//         }
-//     }
-//     else if (event.target.classList.contains("fa-plus")) {
-//         // console.log("plus btn is clicked!");
-//         event.target.previousElementSibling.innerText++;
-//         // Burada tıkladıgım hedefdekinin bir önceki elementi p içinde ki  oluyor bunların innertextine artır dedim böğlelikle Yani artı butonuna basıldıgında 1 leri her seferinde bir artır dedim
-//         calculateProductPrice(event.target);
-//         // Buraya buttonlar tıklandıgında harekete gecildin sidiye bu sekilde göndedik
-//         calculateCartPrice();
-//     }
-//     else if (event.target.className == "remove-product") {
-//         // console.log("remove btn is clicked!");
-//         event.target.parentElement.parentElement.parentElement.remove();
-//     }
-//     else {
-//         // console.log("other element is clicked!");
-//     }
-// });
+const productsDiv = document.querySelector(".products");
+//? 👆Bu kısımda bu üç ürünün ana divini yani productina yakalamış oluyorum.Yani bu sayfadaki üç ürüne de bu sekilde hepsine erişebiliyorum
+//? benim amacım burada productsların içerisindekilere işlevsllik kazandırmak
+
+//*✨Capturing and Bubbling
+//? Capturing yontemi sayesinde sayfama yeni bir ürün bile eklenmiş olsa o ürün products divine girecek ve ben burada onu Capturing yontemi ile yakalamış olacam 
+productsDiv.addEventListener("click", (event) => {
+    if (event.target.className == "fa-solid fa-minus") {
+        // console.log("minus btn is clicked!");
+        //burda dedgım tıklanılan element eger eksi butonu ıse 👆 
+        // assagıdaki olaylar gerceklesecek 
+
+
+        if (event.target.parentElement.querySelector(".quantity").innerText > 1) {
+            //👆 tıklanan elementın parentına git ve 1 den byukse
+            event.target.parentElement.querySelector(".quantity").innerText--;
+            //👆 her  e tıklanıldıgında yanı eksı butonuna basıldıgında bırer bırer düş dedik.  
+            //     calculateProductPrice(event.target);
+
+
+            //     // calculateCartPrice();
+        }
+        //   eğer tıklamış oldugumın parentelementinnin clasının ismi quantity olanı 1 den buyukse bir bir azalt dedik buarada
+        else {
+            if (confirm("Product will be removed???")) {
+                // confirm true mu false mu diye sorup kaldırma işlemi remove yapıyor burada
+                event.target.parentElement.parentElement.parentElement.remove();
+                //?kaldır uyarınıa tamam dersek div i kaldırmış oluyoruz
+                //         // calculateCartPrice();
+            }
+        }
+    }
+    else if (event.target.classList.contains("fa-plus")) {
+        // console.log("plus btn is clicked!");
+        event.target.previousElementSibling.innerText++;
+        //👆 Burada tıkladıgım hedefdekinin bir önceki elementi p içinde ki  oluyor bunların innertextine artır dedim böğlelikle Yani artı butonuna basıldıgında 1 leri her seferinde bir artır dedim
+        // calculateProductPrice(event.target);
+        // // Buraya buttonlar tıklandıgında harekete gecildin sidiye bu sekilde göndedik
+        // calculateCartPrice();
+    }
+    else if (event.target.className == "remove-product") {
+        // console.log("remove btn is clicked!");
+        event.target.parentElement.parentElement.parentElement.remove();
+    }
+    else {
+        console.log("other element is clicked!");
+    }
+});
 
 // const calculateProductPrice = (clickeBtn) =>
 // // Burası artı butonuna basıldıgında calısacak
