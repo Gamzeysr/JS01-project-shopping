@@ -70,21 +70,21 @@ const calculateProductPrice = (clickeBtn) => {
     //* burası ürünleri güncelleyecek olan kısım 
 
     const productInfoDiv = clickeBtn.parentElement.parentElement;
-    // burası quantity-controller classındaki div
+    //*👆quantityi butonuna tıklanınca direk fiyatlara ulaşamam bu yüzden.html de ki producT İnfo ya ulaşmalıyım ki  fiyatlara erişeyim . product ınfoya ulasınca her bir recelin fiyatına ayrı balın fıyatına ayrı karadudun fıyatına ayrı ulaşabiliyorum
     // console.log(productInfoDiv);
-    //! hem artı butonuna hem eksi butonuna ulaşmka için bunu yaptık
-    //! hangi resimdeki artıya tıkladıysam onu çalıştırıyor bu kısım
+
+
     const price = productInfoDiv.querySelector(".product-price strong").innerText;
-    //! Burada htmlde ki product-price in stronguna yani içinde ki 25.98 yazına ulaşmaya calısıyorum
+    //! Burada htmlde ki product-price in stronguna yani içinde ki 25.98 yazına ulaşmaya calısıyorum.
     // alert(price);
     const quantity = productInfoDiv.querySelector(".quantity").innerText;
-    //! Buradada quantityleri yani 1 sayısı yazan yeri almaya çalıştık
+    //! Buradada quantityleri yani 1 sayısı yazan yere eriştik
     const productTotalDiv = productInfoDiv.querySelector(".product-line-price");
-    //! Burada da fiyat yazılarına ulaştım 25,98,45,99,74,99 a ulaştım
+    //! Burada da fiyat yazılarına ulaştım 25,98,45,99,74,99 a ulaştım.
     productTotalDiv.innerText = (price * quantity).toFixed(2);
     // alert(quantity);
     // Buradada o quatity dedğimiz 1 saysını yazan yer ile fiyatı çarpmayı yaptım
-    // toFixed koyarakda ondalıklı sayılardaki ifadelerden ondalık kısmı iki tane olsun diye ayarladık
+    // toFixed koyarakda ondalıklı sayılardaki ifadelerden ondalık kısmı iki tane olsun diye ayarladık.
 
 }
 
