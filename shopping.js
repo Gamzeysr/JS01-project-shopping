@@ -65,7 +65,7 @@ productsDiv.addEventListener("click", (event) => {
         console.log("other element is clicked!");
     }
 });
-// Hesaplama kısmı👇
+// Hesaplama kısmı👇Bu kısımda kaç tane hangi üründen alacaksak fıyat hesaplansın
 const calculateProductPrice = (clickeBtn) => {
     //* burası ürünleri güncelleyecek olan kısım 
 
@@ -80,7 +80,7 @@ const calculateProductPrice = (clickeBtn) => {
     const quantity = productInfoDiv.querySelector(".quantity").innerText;
     //! Buradada quantityleri yani 1 sayısı yazan yere eriştik
     const productTotalDiv = productInfoDiv.querySelector(".product-line-price");
-    //! Burada da fiyat yazılarına ulaştım 25,98,45,99,74,99 a ulaştım.
+    //! Burada da fiyat yazılarına ulaştım 25.98,15,74.99 a ulaştım.
     productTotalDiv.innerText = (price * quantity).toFixed(2);
     // alert(quantity);
     // Buradada o quatity dedğimiz 1 saysını yazan yer ile fiyatı çarpmayı yaptım
@@ -90,7 +90,7 @@ const calculateProductPrice = (clickeBtn) => {
 
 
 const calculateCartPrice = () =>
-//* burası da sepetin güncellenek oldgu kısım 
+//* burası da sepetin güncellenek oldgu kısım
 // Subtotal tax shipping total yazan yer
 {
     const productsTotalPricesDivs = document.querySelectorAll(".product-line-price");
@@ -104,6 +104,7 @@ const calculateCartPrice = () =>
     // Kdv hesapladık
 
     const shippingPrice = parseFloat(subtotal > 0 && subtotal < localStorage.getItem("shippingFreePrice") ? localStorage.getItem("shippingPrice") : 0);
+    //? subtotalım(yani sepetim) 0 dan  buyukse veya subtotalım shipppingFreePriceden kücükse yanı 300den kücükse shippingPrice ı al yanı 15 al,diğer durumda yanı subtotalım sıfırdan kucukse yada subtotalım 300den buyukse shippingPriceımı 0 yap
 
     console.log(shippingPrice);
 
